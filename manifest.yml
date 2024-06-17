@@ -1,0 +1,33 @@
+permissions:
+  scopes:
+    - read:jira-work
+    - write:jira-work
+  external:
+    fetch:
+      backend:
+        - 'https://api.media.atlassian.com'
+        - '*.mayil.ai'
+
+modules:
+  trigger:
+    - key: mayil-ai-jira
+      function: main
+      events:
+        - avi:jira:created:issue
+        - avi:jira:updated:issue
+        - avi:jira:commented:issue
+  consumer:
+    - key: queue-consumer
+      queue: queue-comment
+      resolver:
+        function: consumer-function
+        method: event-listener
+  function:
+    - key: consumer-function
+      handler: index.handler
+    - key: main
+      handler: index.run
+app:
+  id: ari:cloud:ecosystem::app
+  runtime:
+    name: nodejs18.x
