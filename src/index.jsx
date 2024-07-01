@@ -15,7 +15,7 @@ resolver.define("event-listener", async ({ payload, context }) => {
   console.log(`Checking status for ${task_id}, Attempt: ${attempt}`);
 
   const response = await fetch(
-    process.env.SERVER_URL + `/get-results/${task_id}`,
+    process.env.SERVER_URL + `/api/get-results/${task_id}`,
   );
   const result = await response.json();
 
@@ -39,7 +39,7 @@ resolver.define("event-listener", async ({ payload, context }) => {
       return;
     }
     const response_json = await addComment(issue_id, translatedADF);
-    await fetch(process.env.SERVER_URL + "/jira/post_comment", {
+    await fetch(process.env.SERVER_URL + "/api/jira/post_comment", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -151,7 +151,7 @@ export async function run(event, context) {
 
   console.log(`Sending request to Mayil`);
   const triggerResponse = await fetch(
-    process.env.SERVER_URL + "/jira/create_event",
+    process.env.SERVER_URL + "/api/jira/create_event",
     {
       method: "POST",
       headers: {

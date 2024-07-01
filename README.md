@@ -15,7 +15,7 @@ See [Set up Forge](https://developer.atlassian.com/platform/forge/set-up-forge/)
     - Add `mayil.yourdomain.com` to permissions.external.backend defined in `manifest.yml` to point to the Mayil server to be used
 
     - `forge variables set SERVER_URL 'mayil.yourdomain.com'` to point to the Mayil server to be used
-
+- Run `npm install` to install the app's dependencies
 - Build and deploy the app by running `forge deploy`
 
 - Install the app in an Atlassian site by running `forge install`
